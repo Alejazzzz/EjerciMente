@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "989408006299",
+    "project_id": "ejercimente-b02ab",
+    "storage_bucket": "ejercimente-b02ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989408006299:android:d0388dde2c7403f99e363e",
+        "android_client_info": {
+          "package_name": "com.alejandro.ejercimente"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjzRixO2Q4QZJyY-6hiH-XphjdqW69lKw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

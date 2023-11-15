@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAA6S17U_8S4Da1kTJcuPGA4iPhS7LoEcM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>989408006299</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.alejandro.ejercimente</string>
+	<key>PROJECT_ID</key>
+	<string>ejercimente-b02ab</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ejercimente-b02ab.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:989408006299:ios:f0abe1a5dae2b8c69e363e</string>
+</dict>
+</plist>
