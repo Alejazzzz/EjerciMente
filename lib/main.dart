@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 //importaciones firebase
 import 'package:firebase_core/firebase_core.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'firebase_options.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -12,7 +13,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  initializeDateFormatting().then((_) => runApp(MyApp()));
   setupApp();
 }
 

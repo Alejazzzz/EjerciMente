@@ -3,6 +3,9 @@ import 'package:ejercimente/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+
+import 'calendar.dart';
+
 class MainPage extends StatelessWidget {
   static const TextStyle tittleStyle = TextStyle(
     color: Colors.black,
@@ -39,7 +42,11 @@ class MainPage extends StatelessWidget {
                 MySizedBox(40.0, 40.0),
                 InkWell(
                   onTap: (){
-
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => CalendarPage(),
+                      ),
+                    );
                   },
                   child: Container(
                     width: 200.0,
