@@ -17,6 +17,12 @@ class _CalendarPageState extends State<CalendarPage> {
   TextEditingController _eventController = TextEditingController();
   late final ValueNotifier<List<Event>> _selectedEvents;
 
+  static const TextStyle normalStyle = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontSize: 20,
+  );
+
   @override
   void initState() {
     super.initState();
@@ -136,9 +142,19 @@ class _CalendarPageState extends State<CalendarPage> {
                 );
               },
               child: Container(
-                height: 100,
-                width: 100,
-                color: widgets_background_brown,
+                width: 150.0,
+                height: 60.0,
+                decoration: BoxDecoration(
+                  color: widgets_background_brown,
+                  border: Border.all(color: Colors.black, width: 2.0),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Center(
+                  child: Text(
+                    "Añadir evento",
+                    style: normalStyle,
+                  ),
+                )
               ),
             )
           ],

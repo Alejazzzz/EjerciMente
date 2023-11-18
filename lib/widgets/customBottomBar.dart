@@ -1,6 +1,9 @@
+import 'package:ejercimente/screens/exercises_page.dart';
 import 'package:ejercimente/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../screens/calendar.dart';
 
 class CustomBottomBar extends StatelessWidget {
   static const TextStyle customBottomBarStyle = TextStyle(
@@ -35,6 +38,11 @@ class CustomBottomBar extends StatelessWidget {
 
                   ),
                   onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => CalendarPage(),
+                      ),
+                    );
                   },
                 ),
                 const Text(
@@ -62,6 +70,11 @@ class CustomBottomBar extends StatelessWidget {
                     color: Colors.black,
                   ),
                   onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ExercisePage(),
+                      ),
+                    );
                   },
                 ),
                 const Text(

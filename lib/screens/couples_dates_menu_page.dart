@@ -1,3 +1,4 @@
+import 'package:ejercimente/screens/dates_page.dart';
 import 'package:ejercimente/screens/screen_template.dart';
 import 'package:ejercimente/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -92,7 +93,17 @@ class CoupleDatesPage extends StatelessWidget {
                     MySizedBox(10.0, 10.0),
                     InkWell(
                       onTap: (){
-
+                        if (couples) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => DatesPage()),
+                          );
+                        } else {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => DatesPage()),
+                          );
+                        }
                       },
                       child: Container(
                         width: 170.0,
