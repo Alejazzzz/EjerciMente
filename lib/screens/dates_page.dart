@@ -1,9 +1,18 @@
+import 'dart:math';
+
 import 'package:ejercimente/screens/screen_template.dart';
 import 'package:ejercimente/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class DatesPage extends StatelessWidget {
+import 'main_page.dart';
+
+class DatesPage extends StatefulWidget {
+  @override
+  _DatesPageState createState() => _DatesPageState();
+}
+
+class _DatesPageState extends State<DatesPage> {
 
   static const TextStyle tittleStyle = TextStyle(
     color: Colors.black,
@@ -18,23 +27,29 @@ class DatesPage extends StatelessWidget {
   );
 
   static const TextStyle gameStyle = TextStyle(
-    color: Colors.white,
+    color: Colors.black,
     fontWeight: FontWeight.bold,
     fontSize: 35,
   );
 
+  static const TextStyle buttonStyle = TextStyle(
+    color: Colors.white,
+    fontWeight: FontWeight.bold,
+    fontSize: 20,
+  );
+
   DateTime today = DateTime.now();
+  late String generatedRandomDate;
 
   @override
+  void initState() {
+    super.initState();
+    generatedRandomDate = _generateRandomDate(today);
+  }
+
+  
+  @override
   Widget build(BuildContext context) {
-    DateTime twoWeeksAgo = today.subtract(Duration(days: 14));
-
-    DateTime randomDate = twoWeeksAgo.add(
-      Duration(days: (DateTime.now().difference(twoWeeksAgo).inDays * 0.5).round()),
-    );
-
-    String formattedDate = "${_getDayOfWeek(randomDate.weekday)} ${randomDate.day} de ${_getMonthName(randomDate.month)}";
-
     return ScreenTemplate(
       body: Center(
         child: Column(
@@ -53,7 +68,6 @@ class DatesPage extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-
                   ),
                   const Text(
                     "FECHAS",
@@ -67,7 +81,7 @@ class DatesPage extends StatelessWidget {
             Container(
                 width: 305.0,
                 height: 510.0,
-                padding: EdgeInsets.all(5.0),
+                padding: EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   color: widgets_background_brown,
                   border: Border.all(color: Colors.black, width: 2.0),
@@ -76,37 +90,93 @@ class DatesPage extends StatelessWidget {
                 child: Center(
                   child: Column(
                     children: [
-                      MySizedBox(10.0, 10.0),
-                      MySizedBox(10.0, 10.0),
-                      InkWell(
-                        onTap: (){
-
-                        },
-                        child: Container(
-                          width: 170.0,
-                          height: 90.0,
-                          padding: EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
-                            color: purple_games,
-                            border: Border.all(color: Colors.black, width: 2.0),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Row(
-                            children: [
-                              Icon(
-                                FontAwesomeIcons.play,
-                                size: 40,
-                                color: Colors.white,
+                      Text(
+                        "HOY ESTAMOS A ${_getDayOfWeek(today.weekday)}, ${today.day} DE ${_getMonthName(today.month)}",
+                        style: normalStyle,
+                        textAlign: TextAlign.center,
+                      ),
+                      MySizedBox(40.0, 40.0),
+                      const Text(
+                        "LA FECHA A RECORDAR ES:",
+                        style: gameStyle,
+                        textAlign: TextAlign.center,
+                      ),
+                      MySizedBox(40.0, 40.0),
+                      Text(
+                        generatedRandomDate,
+                        style: gameStyle,
+                        textAlign: TextAlign.center,
+                      ),
+                      MySizedBox(40.0, 40.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: (){
+                              setState(() {
+                                generatedRandomDate = _generateRandomDate(today);
+                              });
+                            },
+                            child: Container(
+                              width: 130.0,
+                              height: 70.0,
+                              padding: EdgeInsets.all(5.0),
+                              decoration: BoxDecoration(
+                                color: purple_games,
+                                border: Border.all(color: Colors.black, width: 2.0),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-
-                              Text(
-                                "JUGAR",
-                                style: gameStyle,
-                                textAlign: TextAlign.center,
-                              )
-                            ],
+                              child: const Row(
+                                children: [
+                                  Icon(
+                                    FontAwesomeIcons.play,
+                                    size: 40,
+                                    color: Colors.white,
+                                  ),
+                                  Text(
+                                    "OTRA\nFECHA",
+                                    style: buttonStyle,
+                                    textAlign: TextAlign.center,
+                                  )
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
+                          MySizedBox(5.0, 5.0),
+                          InkWell(
+                            onTap: (){
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => MainPage(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: 130.0,
+                              height: 70.0,
+                              padding: EdgeInsets.all(5.0),
+                              decoration: BoxDecoration(
+                                color: purple_games,
+                                border: Border.all(color: Colors.black, width: 2.0),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Row(
+                                children: [
+                                  Icon(
+                                    FontAwesomeIcons.play,
+                                    size: 40,
+                                    color: Colors.white,
+                                  ),
+                                  Text(
+                                    "MENÚ",
+                                    style: buttonStyle,
+                                    textAlign: TextAlign.center,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
 
                     ],
@@ -120,22 +190,31 @@ class DatesPage extends StatelessWidget {
 
   }
 
+  String _generateRandomDate(DateTime today){
+    DateTime twoWeeksAgo = today.subtract(Duration(days: 14));
+    int totalDaysDifference = DateTime.now().difference(twoWeeksAgo).inDays;
+    int randomDaysOffset = Random().nextInt(totalDaysDifference + 1);
+    DateTime randomDate = twoWeeksAgo.add(Duration(days: randomDaysOffset));
+    String generatedRandomDate = "${_getDayOfWeek(randomDate.weekday)}, ${randomDate.day} DE ${_getMonthName(randomDate.month)}";
+    return generatedRandomDate;
+  }
+
   String _getDayOfWeek(int day) {
     switch (day) {
       case DateTime.monday:
-        return "Lunes";
+        return "LUNES";
       case DateTime.tuesday:
-        return "Martes";
+        return "MARTES";
       case DateTime.wednesday:
-        return "Miércoles";
+        return "MIÉRCOLES";
       case DateTime.thursday:
-        return "Jueves";
+        return "JUEVES";
       case DateTime.friday:
-        return "Viernes";
+        return "VIERNES";
       case DateTime.saturday:
-        return "Sábado";
+        return "SÁBADO";
       case DateTime.sunday:
-        return "Domingo";
+        return "DOMINGO";
       default:
         return "";
     }
@@ -144,29 +223,29 @@ class DatesPage extends StatelessWidget {
   String _getMonthName(int month) {
     switch (month) {
       case DateTime.january:
-        return "enero";
+        return "ENERO";
       case DateTime.february:
-        return "febrero";
+        return "FEBRERO";
       case DateTime.march:
-        return "marzo";
+        return "MARZO";
       case DateTime.april:
-        return "abril";
+        return "ABRIL";
       case DateTime.may:
-        return "mayo";
+        return "MAYO";
       case DateTime.june:
-        return "junio";
+        return "JUNIO";
       case DateTime.july:
-        return "julio";
+        return "JULIO";
       case DateTime.august:
-        return "agosto";
+        return "AGOSTO";
       case DateTime.september:
-        return "septiembre";
+        return "SEPTIEMBRE";
       case DateTime.october:
-        return "octubre";
+        return "OCTUBRE";
       case DateTime.november:
-        return "noviembre";
+        return "NOVIEMBRE";
       case DateTime.december:
-        return "diciembre";
+        return "DICIEMBRE";
       default:
         return "";
     }
