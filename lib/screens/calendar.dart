@@ -16,6 +16,7 @@ class _CalendarPageState extends State<CalendarPage> {
   Map<DateTime, List<Event>> events = {};
   TextEditingController _eventController = TextEditingController();
   late final ValueNotifier<List<Event>> _selectedEvents;
+  late FirebaseService _firebaseService;
 
   static const TextStyle normalStyle = TextStyle(
     color: Colors.black,
@@ -28,6 +29,15 @@ class _CalendarPageState extends State<CalendarPage> {
     super.initState();
     _selectedDay = _focusedDay;
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
+
+    _firebaseService = FirebaseService();
+
+    _firebaseService.loadEvents().then((loadedEvents) {
+      setState(() {
+        events = loadedEvents;
+        _selectedEvents.value = _getEventsForDay(_selectedDay!);
+      });
+    });
   }
 
   @override
@@ -67,7 +77,7 @@ class _CalendarPageState extends State<CalendarPage> {
               onDaySelected: _onDaySelected,
               eventLoader: _getEventsForDay,
               calendarStyle: const CalendarStyle(
-                outsideDaysVisible: false,
+                outsideDaysVisible: true,
               ),
               onFormatChanged: (format) {
                 if (_calendarFormat != format) {
@@ -130,6 +140,8 @@ class _CalendarPageState extends State<CalendarPage> {
                                 },
                                 ifAbsent: () => [newEvent],
                               );
+                              _firebaseService = FirebaseService();
+                              _firebaseService.saveEvents(selectedDay, events[selectedDay]!);
                               Navigator.of(context).pop();
                               setState(() {
                                 _selectedEvents.value = _getEventsForDay(selectedDay);
