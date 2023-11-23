@@ -31,9 +31,7 @@ class FirebaseService {
       final date = DateTime.parse(dateString);
       final List<dynamic> eventsData = document.data()['events'];
 
-      final List<Event> eventsList = eventsData
-          .map((eventData) => Event(eventData['title'] as String))
-          .toList();
+      final List<Event> eventsList = eventsData.map((eventData) => Event(eventData['title'] as String)).toList();
 
       events[date] = eventsList;
     }

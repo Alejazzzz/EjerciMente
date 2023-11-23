@@ -4,6 +4,8 @@ import 'package:ejercimente/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'couples_page.dart';
+
 class CoupleDatesPage extends StatelessWidget {
   final String title;
   final bool couples;
@@ -96,7 +98,7 @@ class CoupleDatesPage extends StatelessWidget {
                         if (couples) {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => DatesPage()),
+                            MaterialPageRoute(builder: (context) => Home()),
                           );
                         } else {
                           Navigator.push(
