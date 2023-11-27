@@ -98,7 +98,7 @@ class CoupleDatesPage extends StatelessWidget {
                         if (couples) {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Home()),
+                            MaterialPageRoute(builder: (context) => CouplesPage()),
                           );
                         } else {
                           Navigator.push(

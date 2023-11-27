@@ -1,35 +1,49 @@
+import 'package:ejercimente/screens/main_page.dart';
 import 'package:ejercimente/screens/screen_template.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ejercimente/models/TileModel.dart';
 import 'package:ejercimente/data/data.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class Home extends StatefulWidget {
+import '../utils/constants.dart';
+
+class CouplesPage extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _CouplesPageState createState() => _CouplesPageState();
 }
 
-class _HomeState extends State<Home> {
+class _CouplesPageState extends State<CouplesPage> {
+
+  static const TextStyle pointsStyle = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontSize: 25,
+  );
+
+  static const TextStyle labelStyle = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontSize: 25,
+  );
+
   List<TileModel> gridViewTiles = [];
   List<TileModel> questionPairs = [];
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    points = 0;
     reStart();
   }
-  void reStart() {
 
+  void reStart() {
     myPairs = getPairs();
     myPairs.shuffle();
 
     gridViewTiles = myPairs;
-    Future.delayed(const Duration(seconds: 5), () {
-// Here you can write your code
+    Future.delayed(const Duration(seconds: 10), () {
       setState(() {
-        print("2 seconds done");
-        // Here you can write your code for open new view
         questionPairs = getQuestionPairs();
         gridViewTiles = questionPairs;
         selected = false;
@@ -40,51 +54,48 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 40,
-              ),
-              points != 800 ? Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "$points/800",
-                    style: TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                    "Points",
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w300),
-                  ),
-                ],
-              ) : Container(),
-              SizedBox(
-                height: 20,
-              ),
-              points != 800 ? GridView(
-                shrinkWrap: true,
-                //physics: ClampingScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    mainAxisSpacing: 0.0, maxCrossAxisExtent: 100.0),
-                children: List.generate(gridViewTiles.length, (index) {
-                  return Tile(
-                    imagePathUrl: gridViewTiles[index].getImageAssetPath(),
-                    tileIndex: index,
-                    parent: this,
-                  );
-                }),
-              ) : Container(
+    return ScreenTemplate(
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+        child: Column(
+          children: <Widget>[
+            MySizedBox(40.0, 40.0),
+            points != 800
+                ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    const Text(
+                      "PUNTUACIÓN:",
+                      textAlign: TextAlign.start,
+                      style: pointsStyle,
+                    ),
+                    Text(
+                      "$points/800",
+                      style: pointsStyle
+                    ),
+                  ],
+                )
+                : Container(),
+            MySizedBox(20.0, 20.0),
+            points != 800
+                ? GridView(
+                  shrinkWrap: true,
+                  //physics: ClampingScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      mainAxisSpacing: 0.0, maxCrossAxisExtent: 100.0),
+                  children: List.generate(gridViewTiles.length, (index) {
+                    return Tile(
+                      imagePathUrl: gridViewTiles[index].getImageAssetPath(),
+                      tileIndex: index,
+                      parent: this,
+                    );
+                  }),
+                )
+                : Container(
                   child: Column(
                     children: <Widget>[
+                      MySizedBox(200, 200),
                       GestureDetector(
                         onTap: (){
                           setState(() {
@@ -93,60 +104,85 @@ class _HomeState extends State<Home> {
                           });
                         },
                         child: Container(
-                          height: 50,
-                          width: 200,
-                          alignment: Alignment.center,
+                          width: 225.0,
+                          height: 100.0,
                           decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(24),
+                            color: widgets_background_brown,
+                            border: Border.all(color: Colors.black, width: 2.0),
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Text("Replay", style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w500
-                          ),),
+                          child: Row(
+                            children: [
+                              MySizedBox(20.0, 20.0),
+                              const Icon(
+                                FontAwesomeIcons.play,
+                                size: 50,
+                              ),
+                              MySizedBox(20.0, 20.0),
+                              const Text(
+                                "OTRA\nPARTIDA",
+                                style: labelStyle,
+                                textAlign: TextAlign.center,
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
                       GestureDetector(
                         onTap: (){
-                          // TODO
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => MainPage(),
+                            ),
+                          );
                         },
                         child: Container(
-                          height: 50,
-                          width: 200,
-                          alignment: Alignment.center,
+                          width: 225.0,
+                          height: 100.0,
                           decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Colors.blue,
-                                width: 2
-                            ),
-                            borderRadius: BorderRadius.circular(24),
+                            color: widgets_background_brown,
+                            border: Border.all(color: Colors.black, width: 2.0),
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Text("Rate Us", style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w500
-                          ),),
+                          child: Row(
+                            children: [
+                              MySizedBox(20.0, 20.0),
+                              const Icon(
+                                FontAwesomeIcons.home,
+                                size: 50,
+                              ),
+                              MySizedBox(20.0, 20.0),
+                              const Text(
+                                "MENÚ\nPRINCIPAL",
+                                style: labelStyle,
+                                textAlign: TextAlign.center,
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ],
                   )
-              )
-            ],
-          ),
+                )
+          ],
         ),
       ),
     );
   }
+
+  Widget MySizedBox(double w, double h) {
+    return SizedBox(
+      width: w,
+      height: h,
+    );
+  }
 }
-
-
 
 class Tile extends StatefulWidget {
   String? imagePathUrl;
   int? tileIndex;
-  _HomeState? parent;
+  _CouplesPageState? parent;
 
   Tile({this.imagePathUrl, this.tileIndex, this.parent});
 
@@ -164,19 +200,13 @@ class _TileState extends State<Tile> {
             myPairs[widget.tileIndex!].setIsSelected(true);
           });
           if (selectedTile != "") {
-            /// testing if the selected tiles are same
             if (selectedTile == myPairs[widget.tileIndex!].getImageAssetPath()) {
-              print("add point");
               points = points + 100;
-              print(selectedTile + " thishis" + widget.imagePathUrl!);
-
               TileModel tileModel = new TileModel();
-              print(widget.tileIndex);
               selected = true;
               Future.delayed(const Duration(seconds: 2), () {
                 tileModel.setImageAssetPath("");
                 myPairs[widget.tileIndex!] = tileModel;
-                print(selectedIndex);
                 myPairs[selectedIndex!] = tileModel;
                 this.widget.parent?.setState(() {});
                 setState(() {
@@ -185,12 +215,6 @@ class _TileState extends State<Tile> {
                 selectedTile = "";
               });
             } else {
-              print(selectedTile +
-                  " thishis " +
-                  myPairs[widget.tileIndex!].getImageAssetPath()!);
-              print("wrong choice");
-              print(widget.tileIndex);
-              print(selectedIndex);
               selected = true;
               Future.delayed(const Duration(seconds: 2), () {
                 this.widget.parent?.setState(() {
@@ -209,9 +233,6 @@ class _TileState extends State<Tile> {
               selectedTile = myPairs[widget.tileIndex!].getImageAssetPath()!;
               selectedIndex = widget.tileIndex!;
             });
-
-            print(selectedTile);
-            print(selectedIndex);
           }
         }
       },
@@ -219,12 +240,11 @@ class _TileState extends State<Tile> {
         margin: EdgeInsets.all(5),
         child: myPairs[widget.tileIndex!].getImageAssetPath() != ""
             ? Image.asset(myPairs[widget.tileIndex!].getIsSelected()!
-            ? myPairs[widget.tileIndex!].getImageAssetPath()!
-            : widget.imagePathUrl!)
+              ? myPairs[widget.tileIndex!].getImageAssetPath()!
+              : widget.imagePathUrl!)
             : Container(
-          color: Colors.white,
-          child: Image.asset("assets/correct.png"),
-        ),
+                child: Image.asset("assets/correct.png"),
+               ),
       ),
     );
   }
