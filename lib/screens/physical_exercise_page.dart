@@ -1,3 +1,4 @@
+import 'package:ejercimente/screens/exercise_list.dart';
 import 'package:ejercimente/screens/screen_template.dart';
 import 'package:ejercimente/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +62,11 @@ class PhysicalPage extends StatelessWidget {
             MySizedBox(50.0, 50.0),
             InkWell(
               onTap: (){
-
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ListExercisePage(),
+                  ),
+                );
               },
               child: Container(
                 width: 200.0,
@@ -75,7 +80,7 @@ class PhysicalPage extends StatelessWidget {
                   children: [
                     MySizedBox(5.0, 5.0),
                     Image.network(
-                      'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/biceps.png?alt=media&token=e409da3c-5ec7-486f-bcc5-4a46afd77aa6',
+                      'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/iconos%2Fbiceps.png?alt=media&token=84823302-1e1e-4061-b71a-e191f0728260',
                       width: 80.0,
                       height: 80.0,
                       fit: BoxFit.cover,
@@ -107,7 +112,7 @@ class PhysicalPage extends StatelessWidget {
                   children: [
                     MySizedBox(5.0, 5.0),
                     Image.network(
-                      'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/balan%C3%A7a.png?alt=media&token=d08bdb55-5cf2-438f-a515-3a502446ef41',
+                      'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/iconos%2Fbalan%C3%A7a.png?alt=media&token=67270c69-bab8-4ff5-9682-89c4f117e8bb',
                       width: 80.0,
                       height: 80.0,
                       fit: BoxFit.cover,
@@ -142,7 +147,7 @@ class PhysicalPage extends StatelessWidget {
                       height: 10,
                     ),
                     Image.network(
-                      'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/persona-andando.png?alt=media&token=f3aee0d6-0ce3-4086-876c-7342794d406f',
+                      'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/iconos%2Fpersona-andando.png?alt=media&token=cb0ae815-cdd5-4625-a2bb-023cddd99406',
                       width: 50.0,
                       height: 74.0,
                       fit: BoxFit.cover,

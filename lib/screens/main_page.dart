@@ -95,7 +95,7 @@ class MainPage extends StatelessWidget {
                       children: [
                         MySizedBox(5.0, 5.0),
                         Image.network(
-                          'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/cerebro-mente.png?alt=media&token=c7ed6576-001c-4aa0-a7ad-bc792b9c5f8f',
+                          'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/iconos%2Fcerebro-mente.png?alt=media&token=12bd244d-e95b-43b1-9859-8e7ce621349c',
                           width: 80.0,
                           height: 85.0,
 

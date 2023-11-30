@@ -81,7 +81,7 @@ class MemoryPage extends StatelessWidget {
                   children: [
                     MySizedBox(10.0, 10.0),
                     Image.network(
-                      'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/parejas.png?alt=media&token=4284e8cf-d4de-4dd2-a643-3bb1648ba18c',
+                      'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/iconos%2Fparejas.png?alt=media&token=c94c9e17-3ec2-47ea-8c82-1bf01fe83d4b',
                       width: 155.0,
                       height: 80.0,
                       fit: BoxFit.cover,
@@ -116,7 +116,7 @@ class MemoryPage extends StatelessWidget {
                 child: Column(
                   children: [
                     Image.network(
-                      'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/nube-fechas.png?alt=media&token=92ba64a3-55de-4619-9f3a-0b2cc2d41aee',
+                      'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/iconos%2Fnube-fechas.png?alt=media&token=85a27115-e7b7-4d7d-821d-8ba32695a1b0',
                       width: 170.0,
                       height: 90.0,
                     ),
