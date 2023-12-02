@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:ejercimente/utils/event.dart';
 
+import 'exercise_info_page.dart';
+
 class ListExercisePage extends StatefulWidget {
   @override
   _ListExercisePageState createState() => _ListExercisePageState();
@@ -37,6 +39,7 @@ class _ListExercisePageState extends State<ListExercisePage> {
 
     return querySnapshot.docs.map((DocumentSnapshot<Map<String, dynamic>> doc) {
       return {
+        'id': doc.id,
         'nombre': doc['nombre'],
         'foto': doc['foto'],
       };
@@ -110,22 +113,32 @@ class _ListExercisePageState extends State<ListExercisePage> {
   }
 
   Widget _buildItem(Map<String, dynamic> item) {
-    return Card(
-      elevation: 5,
-      child: Column(
-        children: [
-          Image.network(
-            item['foto'],
-            width: 150,
-            height: 140,
-            fit: BoxFit.cover,
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ExerciseInfoPage(exerciseName: item['id']),
           ),
-          SizedBox(height: 8),
-          Text(
-            item['nombre'],
-            style: normalStyle,
-          ),
-        ],
+        );
+      },
+      child: Card(
+        elevation: 5,
+        child: Column(
+          children: [
+            Image.network(
+              item['foto'],
+              width: 150,
+              height: 140,
+              fit: BoxFit.cover,
+            ),
+            SizedBox(height: 8),
+            Text(
+              item['nombre'],
+              style: normalStyle,
+            ),
+          ],
+        ),
       ),
     );
   }

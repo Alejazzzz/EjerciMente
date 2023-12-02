@@ -1,4 +1,4 @@
-import 'package:ejercimente/screens/exercise_list.dart';
+import 'package:ejercimente/screens/exercise_list_page.dart';
 import 'package:ejercimente/screens/screen_template.dart';
 import 'package:ejercimente/utils/constants.dart';
 import 'package:flutter/material.dart';
