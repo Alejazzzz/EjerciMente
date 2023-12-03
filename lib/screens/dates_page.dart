@@ -160,14 +160,15 @@ class _DatesPageState extends State<DatesPage> {
                                 border: Border.all(color: Colors.black, width: 2.0),
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: const Row(
+                              child: Row(
                                 children: [
-                                  Icon(
-                                    FontAwesomeIcons.play,
-                                    size: 40,
+                                  const Icon(
+                                    FontAwesomeIcons.home,
+                                    size: 35,
                                     color: Colors.white,
                                   ),
-                                  Text(
+                                  MySizedBox(10.0, 10.0),
+                                  const Text(
                                     "MENÚ",
                                     style: buttonStyle,
                                     textAlign: TextAlign.center,

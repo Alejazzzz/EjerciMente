@@ -27,6 +27,12 @@ class _CouplesPageState extends State<CouplesPage> {
     fontSize: 25,
   );
 
+  static const TextStyle tittleStyle = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontSize: 40,
+  );
+
   List<TileModel> gridViewTiles = [];
   List<TileModel> questionPairs = [];
 
@@ -95,7 +101,13 @@ class _CouplesPageState extends State<CouplesPage> {
                 : Container(
                   child: Column(
                     children: <Widget>[
-                      MySizedBox(200, 200),
+                      MySizedBox(75, 75),
+                      const Text(
+                        "¡ENHORABUENA!\nQUE DESEA HACER AHORA",
+                        style: tittleStyle,
+                        textAlign: TextAlign.center,
+                      ),
+                      MySizedBox(50, 50),
                       GestureDetector(
                         onTap: (){
                           setState(() {

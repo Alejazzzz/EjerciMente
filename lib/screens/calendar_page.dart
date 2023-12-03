@@ -10,6 +10,18 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
+  static const TextStyle normalStyle = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontSize: 20,
+  );
+
+  static const TextStyle tittleStyle = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontSize: 25,
+  );
+
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
@@ -17,12 +29,6 @@ class _CalendarPageState extends State<CalendarPage> {
   TextEditingController _eventController = TextEditingController();
   late final ValueNotifier<List<Event>> _selectedEvents;
   late FirebaseService _firebaseService;
-
-  static const TextStyle normalStyle = TextStyle(
-    color: Colors.black,
-    fontWeight: FontWeight.bold,
-    fontSize: 20,
-  );
 
   @override
   void initState() {
@@ -65,7 +71,20 @@ class _CalendarPageState extends State<CalendarPage> {
     return ScreenTemplate(
         body: Column(
           children: [
-            MySizedBox(20.0,20.0),
+            MySizedBox(200.0, 65.0),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Row(
+                children: [
+                  MySizedBox(15.0, 15.0),
+                  const Text(
+                    "CALENDARIO",
+                    style: tittleStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
             TableCalendar(
               locale: 'es_ES',
               firstDay: DateTime.utc(2010, 10, 16),
@@ -103,10 +122,13 @@ class _CalendarPageState extends State<CalendarPage> {
                       decoration: BoxDecoration(
                         border: Border.all(),
                         borderRadius: BorderRadius.circular(12),
+                        color: Colors.white
                       ),
                       child: ListTile(
-                        onTap: () => print(""),
-                        title: Text(currentEvent.title),
+                        title: Text(
+                          currentEvent.title,
+                          style: normalStyle,
+                        ),
                       ),
                     );
                   }

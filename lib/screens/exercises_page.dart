@@ -31,27 +31,17 @@ class ExercisePage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            MySizedBox(200.0, 75.0),
+            MySizedBox(200.0, 85.0),
             Align(
               alignment: Alignment.centerLeft,
               child: Row(
                 children: [
-                  IconButton(
-                    icon: const Icon(
-                        Icons.arrow_back,
-                        size: 30,
-                        color: Colors.black,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-
-                  ),
-                  const Text(
+                  MySizedBox(15.0, 15.0),
+                  Text(
                     "EJERCICIOS",
                     style: tittleStyle,
                     textAlign: TextAlign.center,
-                  )
+                  ),
                 ],
               ),
             ),

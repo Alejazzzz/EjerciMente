@@ -53,27 +53,25 @@ class _ListExercisePageState extends State<ListExercisePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.only(left: 16, top: 8),
-            child: Row(
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    size: 30,
-                    color: Colors.black,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
+          MySizedBox(150.0, 70.0),
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(
+                  Icons.arrow_back,
+                  size: 30,
+                  color: Colors.black,
                 ),
-                const Text(
-                  "FUERZA",
-                  style: tittleStyle,
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              const Text(
+                "EJERCICIOS DE FUERZA",
+                style: tittleStyle,
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
           Expanded(
             child: FutureBuilder<List<Map<String, dynamic>>>(
