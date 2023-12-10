@@ -8,6 +8,9 @@ import 'package:ejercimente/utils/event.dart';
 import 'exercise_info_page.dart';
 
 class ListExercisePage extends StatefulWidget {
+  final String collection;
+  ListExercisePage({required this.collection});
+
   @override
   _ListExercisePageState createState() => _ListExercisePageState();
 }
@@ -16,7 +19,7 @@ class _ListExercisePageState extends State<ListExercisePage> {
   static const TextStyle normalStyle = TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.bold,
-    fontSize: 20,
+    fontSize: 18,
   );
 
   static const TextStyle tittleStyle = TextStyle(
@@ -35,7 +38,7 @@ class _ListExercisePageState extends State<ListExercisePage> {
 
   Future<List<Map<String, dynamic>>> _loadExercise() async {
     QuerySnapshot<Map<String, dynamic>> querySnapshot =
-    await FirebaseFirestore.instance.collection('FUERZA').get();
+    await FirebaseFirestore.instance.collection(widget.collection).get();
 
     return querySnapshot.docs.map((DocumentSnapshot<Map<String, dynamic>> doc) {
       return {
@@ -116,7 +119,7 @@ class _ListExercisePageState extends State<ListExercisePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ExerciseInfoPage(exerciseName: item['id']),
+            builder: (context) => ExerciseInfoPage(exerciseName: item['id'], collection: widget.collection,),
           ),
         );
       },

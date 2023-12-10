@@ -4,8 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ExerciseInfoPage extends StatefulWidget {
   final String exerciseName;
-
-  ExerciseInfoPage({required this.exerciseName});
+  final String collection;
+  ExerciseInfoPage({required this.exerciseName, required this.collection});
 
   @override
   _ExerciseInfoPageState createState() => _ExerciseInfoPageState();
@@ -32,7 +32,7 @@ class _ExerciseInfoPageState extends State<ExerciseInfoPage> {
   }
 
   Future<DocumentSnapshot<Map<String, dynamic>>> _loadExerciseInfo() async {
-    return FirebaseFirestore.instance.collection('FUERZA').doc(widget.exerciseName).get();
+    return FirebaseFirestore.instance.collection(widget.collection).doc(widget.exerciseName).get();
   }
 
   @override
@@ -60,72 +60,74 @@ class _ExerciseInfoPageState extends State<ExerciseInfoPage> {
   }
 
   Widget _buildExerciseDetails(Map<String, dynamic> exerciseData) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: 400,
-          height: 225,
-          color: Colors.red,
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16.0, 5.0,0,0,),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Nombre',
-                style: tittleStyle,
-              ),
-              MyDivider(),
-              MySizedBox(5, 5),
-              Text(
-                '${exerciseData['nombre']}',
-                style: infoStyle,
-              ),
-              MySizedBox(10, 10),
-              const Text(
-                'Parte del cuerpo',
-                style: tittleStyle,
-              ),
-              MyDivider(),
-              MySizedBox(5, 5),
-              Text(
-                '${exerciseData['parte del cuerpo']}',
-                style: infoStyle,
-              ),
-              MySizedBox(10, 10),
-              const Text(
-                'Instrucciones',
-                style: tittleStyle,
-              ),
-              MyDivider(),
-              MySizedBox(5, 5),
-              Text(
-                '${exerciseData['instrucciones']}'
-                    .split('-')
-                    .asMap()
-                    .entries
-                    .map((entry) => '${entry.key + 1}. ${entry.value.trim()}')
-                    .join('\n'),
-                style: infoStyle,
-              ),
-              MySizedBox(10, 10),
-              const Text(
-                'Repeticiones',
-                style: tittleStyle,
-              ),
-              MyDivider(),
-              MySizedBox(5, 5),
-              Text(
-                '${exerciseData['repeticiones']}',
-                style: infoStyle,
-              ),
-              MySizedBox(10, 10),
-            ],
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 400,
+            height: 225,
+            color: Colors.red,
           ),
-        )
-      ],
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16.0, 5.0,0,0,),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Nombre',
+                  style: tittleStyle,
+                ),
+                MyDivider(),
+                MySizedBox(5, 5),
+                Text(
+                  '${exerciseData['nombre']}',
+                  style: infoStyle,
+                ),
+                MySizedBox(10, 10),
+                const Text(
+                  'Parte del cuerpo',
+                  style: tittleStyle,
+                ),
+                MyDivider(),
+                MySizedBox(5, 5),
+                Text(
+                  '${exerciseData['parte del cuerpo']}',
+                  style: infoStyle,
+                ),
+                MySizedBox(10, 10),
+                const Text(
+                  'Instrucciones',
+                  style: tittleStyle,
+                ),
+                MyDivider(),
+                MySizedBox(5, 5),
+                Text(
+                  '${exerciseData['instrucciones']}'
+                      .split('-')
+                      .asMap()
+                      .entries
+                      .map((entry) => '${entry.key + 1}. ${entry.value.trim()}')
+                      .join('\n'),
+                  style: infoStyle,
+                ),
+                MySizedBox(10, 10),
+                const Text(
+                  'Repeticiones',
+                  style: tittleStyle,
+                ),
+                MyDivider(),
+                MySizedBox(5, 5),
+                Text(
+                  '${exerciseData['repeticiones']}',
+                  style: infoStyle,
+                ),
+                MySizedBox(10, 10),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 

@@ -64,7 +64,7 @@ class PhysicalPage extends StatelessWidget {
               onTap: (){
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => ListExercisePage(),
+                    builder: (context) => ListExercisePage(collection: 'FUERZA'),
                   ),
                 );
               },
@@ -97,8 +97,12 @@ class PhysicalPage extends StatelessWidget {
             ),
             MySizedBox(40.0, 40.0),
             InkWell(
-              onTap: () {
-
+              onTap: (){
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ListExercisePage(collection: 'EQUILIBRIO'),
+                  ),
+                );
               },
               child: Container(
                 width: 200.0,
@@ -130,7 +134,11 @@ class PhysicalPage extends StatelessWidget {
             MySizedBox(40.0, 40.0),
             InkWell(
               onTap: (){
-
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ListExercisePage(collection: 'MARCHA'),
+                  ),
+                );
               },
               child: Container(
                 width: 200.0,
