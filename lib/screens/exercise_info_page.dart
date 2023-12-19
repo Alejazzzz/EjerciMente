@@ -2,6 +2,8 @@ import 'package:ejercimente/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../utils/timer.dart';
+
 class ExerciseInfoPage extends StatefulWidget {
   final String exerciseName;
   final String collection;
@@ -67,10 +69,13 @@ class _ExerciseInfoPageState extends State<ExerciseInfoPage> {
           Container(
             width: 400,
             height: 225,
-            color: Colors.red,
+            color: Colors.white,
+            child: Image.network(
+              '${exerciseData['gif']}',
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 5.0,0,0,),
+            padding: const EdgeInsets.fromLTRB(16.0, 10.0,0,0,),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -123,6 +128,13 @@ class _ExerciseInfoPageState extends State<ExerciseInfoPage> {
                   style: infoStyle,
                 ),
                 MySizedBox(10, 10),
+                Align(
+                  alignment: Alignment.center,
+                  child: exerciseData.containsKey('segundos')
+                      ? MyTimerButton(seconds: exerciseData['segundos'])
+                      : Container(),
+                )
+
               ],
             ),
           )
@@ -146,4 +158,5 @@ class _ExerciseInfoPageState extends State<ExerciseInfoPage> {
       color: Colors.black,
     );
   }
+
 }

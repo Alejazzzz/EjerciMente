@@ -69,8 +69,8 @@ class _ListExercisePageState extends State<ListExercisePage> {
                   Navigator.of(context).pop();
                 },
               ),
-              const Text(
-                "EJERCICIOS DE FUERZA",
+              Text(
+                "EJERCICIOS DE ${widget.collection}",
                 style: tittleStyle,
                 textAlign: TextAlign.center,
               ),
