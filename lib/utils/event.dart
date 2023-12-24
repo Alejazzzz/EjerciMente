@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Event{
+class Event {
   final String title;
-  Event(this.title);
+  final String time;
+
+  Event(this.title, this.time);
 }
 
 class FirebaseService {
@@ -10,7 +12,7 @@ class FirebaseService {
 
   Future<void> saveEvents(DateTime date, List<Event> events) async {
     final dateString = date.toIso8601String();
-    final eventsMap = events.map((event) => {'title': event.title}).toList();
+    final eventsMap = events.map((event) => {'title': event.title, 'date': event.time}).toList();
 
     await _firestore.collection('EVENTOS').doc(dateString).set(
       {
@@ -21,8 +23,7 @@ class FirebaseService {
   }
 
   Future<Map<DateTime, List<Event>>> loadEvents() async {
-    final QuerySnapshot<Map<String, dynamic>> querySnapshot =
-    await _firestore.collection('EVENTOS').get();
+    final QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore.collection('EVENTOS').get();
 
     final Map<DateTime, List<Event>> events = {};
 
@@ -31,7 +32,7 @@ class FirebaseService {
       final date = DateTime.parse(dateString);
       final List<dynamic> eventsData = document.data()['events'];
 
-      final List<Event> eventsList = eventsData.map((eventData) => Event(eventData['title'] as String)).toList();
+      final List<Event> eventsList = eventsData.map((eventData) => Event(eventData['title'] as String, eventData['time'] as String)).toList();
 
       events[date] = eventsList;
     }

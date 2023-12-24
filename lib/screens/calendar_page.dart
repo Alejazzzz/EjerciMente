@@ -27,6 +27,7 @@ class _CalendarPageState extends State<CalendarPage> {
   DateTime? _selectedDay;
   Map<DateTime, List<Event>> events = {};
   TextEditingController _eventController = TextEditingController();
+  TextEditingController _timeEventController = TextEditingController();
   late final ValueNotifier<List<Event>> _selectedEvents;
   late FirebaseService _firebaseService;
 
@@ -125,9 +126,19 @@ class _CalendarPageState extends State<CalendarPage> {
                         color: Colors.white
                       ),
                       child: ListTile(
-                        title: Text(
-                          currentEvent.title,
-                          style: normalStyle,
+                        title: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                currentEvent.title,
+                                style: normalStyle,
+                              ),
+                            ),
+                            Text(
+                              currentEvent.time,
+                              style: normalStyle,
+                            ),
+                          ],
                         ),
                       ),
                     );
@@ -142,18 +153,28 @@ class _CalendarPageState extends State<CalendarPage> {
                   builder: (context) {
                     return AlertDialog(
                       scrollable: true,
-                      title: Text("Nombre del evento"),
+                      title: Text("Evento"),
                       content: Padding(
                         padding: EdgeInsets.all(8),
-                        child: TextField(
-                          controller: _eventController,
+                        child: Column(
+                          children: [
+                            TextField(
+                              controller: _eventController,
+                              decoration: InputDecoration(labelText: 'Nombre'),
+                            ),
+                            TextField(
+                              controller: _timeEventController,
+                              decoration: InputDecoration(labelText: 'Hora'),
+                              keyboardType: TextInputType.datetime,
+                            ),
+                          ],
                         ),
                       ),
                       actions: [
                         ElevatedButton(
                             onPressed: () {
                               final selectedDay = _selectedDay!;
-                              final newEvent = Event(_eventController.text);
+                              final newEvent = Event(_eventController.text,_timeEventController.text);
                               events.update(
                                 selectedDay,
                                     (existingEvents) {
