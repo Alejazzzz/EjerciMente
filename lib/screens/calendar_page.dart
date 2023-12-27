@@ -170,14 +170,7 @@ class _CalendarPageState extends State<CalendarPage> {
                               decoration: InputDecoration(
                                 labelText: 'Hora del evento (HH:mm)',
                                 hintText: 'Ejemplo: 10:30',
-                                errorText: _timeErrorText.isNotEmpty ? _timeErrorText : null,
                               ),
-                              onChanged: (value) {
-                                setState(() {
-                                  _timeErrorText = '';
-                                  _timeEventController.text = value;
-                                });
-                              },
                             ),
                           ],
                         ),
@@ -186,9 +179,11 @@ class _CalendarPageState extends State<CalendarPage> {
                         ElevatedButton(
                             onPressed: () {
                               if (!_isValidTimeFormat(_timeEventController.text)) {
-                                setState(() {
-                                  _timeErrorText = 'Formato de hora inválido';
-                                });
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Formato de hora inválido'),
+                                  ),
+                                );
                                 return;
                               }
                               final selectedDay = _selectedDay!;
