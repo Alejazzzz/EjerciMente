@@ -28,6 +28,7 @@ class _CalendarPageState extends State<CalendarPage> {
   Map<DateTime, List<Event>> events = {};
   TextEditingController _eventController = TextEditingController();
   TextEditingController _timeEventController = TextEditingController();
+  String _timeErrorText = '';
   late final ValueNotifier<List<Event>> _selectedEvents;
   late FirebaseService _firebaseService;
 
@@ -151,6 +152,8 @@ class _CalendarPageState extends State<CalendarPage> {
                 showDialog(
                   context: context,
                   builder: (context) {
+                    _eventController.text = '';
+                    _timeEventController.text = '';
                     return AlertDialog(
                       scrollable: true,
                       title: Text("Evento"),
@@ -164,8 +167,17 @@ class _CalendarPageState extends State<CalendarPage> {
                             ),
                             TextField(
                               controller: _timeEventController,
-                              decoration: InputDecoration(labelText: 'Hora'),
-                              keyboardType: TextInputType.datetime,
+                              decoration: InputDecoration(
+                                labelText: 'Hora del evento (HH:mm)',
+                                hintText: 'Ejemplo: 10:30',
+                                errorText: _timeErrorText.isNotEmpty ? _timeErrorText : null,
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  _timeErrorText = '';
+                                  _timeEventController.text = value;
+                                });
+                              },
                             ),
                           ],
                         ),
@@ -173,6 +185,12 @@ class _CalendarPageState extends State<CalendarPage> {
                       actions: [
                         ElevatedButton(
                             onPressed: () {
+                              if (!_isValidTimeFormat(_timeEventController.text)) {
+                                setState(() {
+                                  _timeErrorText = 'Formato de hora inválido';
+                                });
+                                return;
+                              }
                               final selectedDay = _selectedDay!;
                               final newEvent = Event(_eventController.text,_timeEventController.text);
                               events.update(
@@ -222,6 +240,12 @@ class _CalendarPageState extends State<CalendarPage> {
       width: w,
       height: h,
     );
+  }
+
+  bool _isValidTimeFormat(String input) {
+    final pattern = r'^([01]?[0-9]|2[0-3]):[0-5][0-9]$';
+    final RegExp regex = RegExp(pattern);
+    return regex.hasMatch(input);
   }
 }
 

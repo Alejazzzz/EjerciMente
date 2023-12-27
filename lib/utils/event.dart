@@ -12,7 +12,7 @@ class FirebaseService {
 
   Future<void> saveEvents(DateTime date, List<Event> events) async {
     final dateString = date.toIso8601String();
-    final eventsMap = events.map((event) => {'title': event.title, 'date': event.time}).toList();
+    final eventsMap = events.map((event) => {'title': event.title, 'time': event.time}).toList();
 
     await _firestore.collection('EVENTOS').doc(dateString).set(
       {
