@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 import 'calendar_page.dart';
+import 'help_page.dart';
 
 class MainPage extends StatelessWidget {
   static const TextStyle tittleStyle = TextStyle(
@@ -98,7 +99,6 @@ class MainPage extends StatelessWidget {
                           'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/iconos%2Fcerebro-mente.png?alt=media&token=12bd244d-e95b-43b1-9859-8e7ce621349c',
                           width: 80.0,
                           height: 85.0,
-
                         ),
                         MySizedBox(2.0, 2.0),
                         const Text(
@@ -113,7 +113,11 @@ class MainPage extends StatelessWidget {
                 MySizedBox(40.0, 40.0),
                 InkWell(
                   onTap: (){
-
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => HelpPage(),
+                      ),
+                    );
                   },
                   child: Container(
                     width: 200.0,
@@ -130,9 +134,9 @@ class MainPage extends StatelessWidget {
                           height: 10,
                         ),
                         const Icon(
-                          Icons.help, // Icono de calendario
-                          size: 70, // Tamaño del icono
-                          color: Colors.black, // Color del icono
+                          Icons.help,
+                          size: 70,
+                          color: Colors.black,
                         ),
                         MySizedBox(10.0, 10.0),
                         const Text(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../screens/calendar_page.dart';
+import '../screens/help_page.dart';
 
 class CustomBottomBar extends StatelessWidget {
   static const TextStyle customBottomBarStyle = TextStyle(
@@ -102,6 +103,11 @@ class CustomBottomBar extends StatelessWidget {
                     color: Colors.black,
                   ),
                   onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => HelpPage(),
+                      ),
+                    );
                   },
                 ),
                 const Text(

@@ -167,7 +167,7 @@ class _CalendarPageState extends State<CalendarPage> {
                             ),
                             TextField(
                               controller: _timeEventController,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 labelText: 'Hora del evento (HH:mm)',
                                 hintText: 'Ejemplo: 10:30',
                               ),
