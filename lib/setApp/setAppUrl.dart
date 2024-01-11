@@ -15,6 +15,6 @@ Future<void> setupApp() async {
   print(imageUrl7);
   String imageUrl8 = await getImageDownloadURL('tutorial/juego_parejas.jpeg');
   print(imageUrl8);
-  String imageUrl11 = await getImageDownloadURL('tutorial/parejas.jpeg');
+  String imageUrl11 = await getImageDownloadURL('tutorial/bottomAppbar.PNG');
   print(imageUrl11);
 }

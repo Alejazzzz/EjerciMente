@@ -10,18 +10,23 @@ class TutorialPage extends StatefulWidget {
 
 class _TutorialPageState extends State<TutorialPage> {
   static DotsDecorator dots = DotsDecorator(
-      size: const Size.square(8.0),
-      activeSize: const Size(15.0, 8.0),
+      size: const Size.square(6.0),
+      activeSize: const Size(13.0, 6.0),
       activeColor: Colors.blue,
       color: Colors.black26,
       spacing: const EdgeInsets.symmetric(horizontal: 2.0),
       activeShape:
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(23.0)));
+      RoundedRectangleBorder(borderRadius: BorderRadius.circular(19.0)));
 
   static const TextStyle normalStyle = TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.bold,
     fontSize: 16,
+  );
+  static const TextStyle finalStyle = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.bold,
+    fontSize: 20,
   );
 
   @override
@@ -45,13 +50,16 @@ class _TutorialPageState extends State<TutorialPage> {
   }
 
   List<PageViewModel> listImages() {
+    const pageDecoration = PageDecoration(
+      contentMargin: EdgeInsets.only(top: 50, right: 5, left: 5),  // Ajusta el valor según tu preferencia
+    );
     return [
       PageViewModel(
         title: 'BIENVENIDOS AL TUTORIAL',
         bodyWidget: Column(
           children: [
             const Text(
-              "ESTE TUTORIAL SIRVE PARA APRENDER A COMO UTILIZAR LA APLICACIÓN \n LAS 2 PRINCIPALES ACTIVIDADES SON LOS EJERCICIOS O EL CALENDARIO Y LUEGO CUENTA CON UN "
+              "ESTE TUTORIAL SIRVE PARA APRENDER A COMO UTILIZAR LA APLICACIÓN DESDE CERO. \n LAS 2 PRINCIPALES ACTIVIDADES SON LOS EJERCICIOS Y EL CALENDARIO. LUEGO CUENTA CON UN "
                   "APARTADO DE AYUDA",
               style: normalStyle,
               textAlign: TextAlign.center,
@@ -63,30 +71,32 @@ class _TutorialPageState extends State<TutorialPage> {
             )
           ],
         ),
+        decoration: pageDecoration,
       ),
       PageViewModel(
         title: 'BARRA INFERIOR',
         bodyWidget: Column(
           children: [
             const Text(
-              "EN LA PARTE INFERIOR DE LA PANTALLA CASI SIEMPRE SE ENCONTRARÁ UNA BARRA DE NAVEGACIÓN RÁPIDA PARA IR A CUALQUIERA DE LAS 3 ACTIVIDADES PRINCIPALES",
+              "EN LA PARTE INFERIOR DE LA PANTALLA CASI SIEMPRE SE ENCONTRARÁ UNA BARRA DE NAVEGACIÓN RÁPIDA PARA IR A CUALQUIERA DE LAS 3 ACTIVIDADES PRINCIPALES DESDE ESE PUNTO DE LA APLICACIÓN",
               style: normalStyle,
               textAlign: TextAlign.center,
             ),
             Image.network(
-              'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/tutorial%2FbottomAppbar.PNG?alt=media&token=3664940b-acd9-49e7-ad32-1080e9ddc83f',
-              width: 500,
+              'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/tutorial%2FbottomAppbar.PNG?alt=media&token=6917e248-37cb-421c-8b34-5ef1c90d3dc4',
+              width: 400,
               height: 500,
             )
           ],
         ),
+        decoration: pageDecoration,
       ),
       PageViewModel(
         title: 'CALENDARIO',
         bodyWidget: Column(
           children: [
             const Text(
-              "EN EL CALENDARIO PODRÁS AÑADIR TUS EVENTOS MÁS IMPORTANTES PARA PODER RECORDARLOS \n  UNA VEZ SELECCIONADO EL DÍA, DEBE DARLE AL BOTÓN AÑADIR EVENTO Y COMPLETAR LA INFORMACIÓN RELEVANTE AL EVENTO",
+              "EN EL CALENDARIO PODRÁ AÑADIR SUS EVENTOS MÁS IMPORTANTES PARA PODER RECORDARLOS. \n  UNA VEZ SELECCIONADO EL DÍA, DEBE DARLE AL BOTÓN 'AÑADIR EVENTO' Y COMPLETAR LA INFORMACIÓN RELEVANTE AL EVENTO",
               style: normalStyle,
               textAlign: TextAlign.center,
             ),
@@ -97,6 +107,7 @@ class _TutorialPageState extends State<TutorialPage> {
             )
           ],
         ),
+        decoration: pageDecoration,
       ),
       PageViewModel(
         title: 'EJERCICIOS',
@@ -107,6 +118,7 @@ class _TutorialPageState extends State<TutorialPage> {
               style: normalStyle,
               textAlign: TextAlign.center,
             ),
+            const SizedBox(width: 20, height: 20,),
             Image.network(
               'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/tutorial%2Fejercicios.jpeg?alt=media&token=545790de-4dfe-4e14-8f17-d02eeddc10f1',
               width: 400,
@@ -114,6 +126,7 @@ class _TutorialPageState extends State<TutorialPage> {
             )
           ],
         ),
+        decoration: pageDecoration,
       ),
       PageViewModel(
         title: 'EJERCICIOS FÍSICOS',
@@ -124,6 +137,7 @@ class _TutorialPageState extends State<TutorialPage> {
               style: normalStyle,
               textAlign: TextAlign.center,
             ),
+            const SizedBox(width: 20, height: 20,),
             Image.network(
               'https://firebasestorage.googleapis.com/v0/b/ejercimente-b02ab.appspot.com/o/tutorial%2Fejercicio_fisico.jpeg?alt=media&token=f1be6a31-48dc-4a01-83e0-748f79770ff1',
               width: 400,
@@ -131,13 +145,14 @@ class _TutorialPageState extends State<TutorialPage> {
             )
           ],
         ),
+        decoration: pageDecoration,
       ),
       PageViewModel(
         title: 'EJERCICIOS FÍSICOS',
         bodyWidget: Column(
           children: [
             const Text(
-              "LOS 3 TIPOS FUNCIONAN DE LA MISMA MANERA, UNA VEZ EN ELLOS SE ENCUENTRA UN LISTADO DE ESTOS EJERCICIOS Y USTED DEBE CLICKAR EN EL QUE DESEÉ HACER",
+              "LOS 3 TIPOS FUNCIONAN DE LA MISMA MANERA, UNA VEZ HAYAMOS SELECCIONADO UNO DE ELLOS, SE MUESTRA UN LISTADO DE ESTOS EJERCICIOS Y USTED DEBE CLICKAR EN EL QUE DESEÉ HACER",
               style: normalStyle,
               textAlign: TextAlign.center,
             ),
@@ -148,13 +163,14 @@ class _TutorialPageState extends State<TutorialPage> {
             )
           ],
         ),
+        decoration: pageDecoration,
       ),
       PageViewModel(
         title: 'EJERCICIOS FÍSICOS',
         bodyWidget: Column(
           children: [
             const Text(
-              "UNA VEZ EN EL EJERCICIO PODRÁ VER TODO TIPO DE INFORMACIÓN RELATIVA A EL, INSTRUCCIONES, MÚSCULOS INVOLUCRADOS Y MUCHO MÁS",
+              "UNA VEZ EN EL EJERCICIO PODRÁ VER TODO TIPO DE INFORMACIÓN RELATIVA A EL COMO PUEDEN SER SUS INSTRUCCIONES, MÚSCULOS INVOLUCRADOS Y MUCHO MÁS",
               style: normalStyle,
               textAlign: TextAlign.center,
             ),
@@ -165,6 +181,7 @@ class _TutorialPageState extends State<TutorialPage> {
             )
           ],
         ),
+        decoration: pageDecoration,
       ),
       PageViewModel(
         title: 'EJERCICIOS DE MEMORIA',
@@ -175,6 +192,7 @@ class _TutorialPageState extends State<TutorialPage> {
               style: normalStyle,
               textAlign: TextAlign.center,
             ),
+            const SizedBox(width: 20, height: 20,),
             Column(
               children: [
                 Image.network(
@@ -192,13 +210,14 @@ class _TutorialPageState extends State<TutorialPage> {
             )
           ],
         ),
+        decoration: pageDecoration,
       ),
       PageViewModel(
         title: 'EJERCICIOS DE MEMORIA',
         bodyWidget: Column(
           children: [
             const Text(
-              "UNA VEZ EN EL EJERCICIO SE LE MOSTRARÁN LAS INSTRUCCIONES DEL EJERCICIO Y PODRÁ INICIAR EL JUEGO",
+              "UNA VEZ SELECCIONE EL EJERCICIO A REALIZAR, SE MOSTRARÁN LAS INSTRUCCIONES DEL EJERCICIO Y PODRÁ INICIAR EL JUEGO",
               style: normalStyle,
               textAlign: TextAlign.center,
             ),
@@ -209,6 +228,21 @@ class _TutorialPageState extends State<TutorialPage> {
             )
           ],
         ),
+        decoration: pageDecoration,
+      ),
+      PageViewModel(
+        title: '',
+        bodyWidget: const Column(
+          children: [
+            SizedBox(width: 50.0, height: 180.0,),
+            Text(
+              "HASTA AQUÍ LLEGA EL TUTORIAL DE EJERCIMENTE, ESPERO QUE LE HAYA AYUDADO Y PUEDA DISFRUTAR AL COMPLETO DE ESTA APLICACIÓN. \n PULSE EL BOTÓN HECHO EN LA ESQUINA INFERIOR DERECHA PARA VOLVER AL MENÚ",
+              style: finalStyle,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+        decoration: pageDecoration,
       ),
 
 

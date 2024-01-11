@@ -33,7 +33,6 @@ class _MyTimerButtonState extends State<MyTimerButton> with SingleTickerProvider
     _animation = IntTween(begin: widget.seconds, end: 0).animate(_controller)
       ..addListener(() {
         setState(() {
-          // Rebuild the widget to reflect the updated time.
         });
       })
       ..addStatusListener((status) {
@@ -60,9 +59,9 @@ class _MyTimerButtonState extends State<MyTimerButton> with SingleTickerProvider
       },
       child: Text(
         _isTimerRunning
-            ? _animation.value == 20
-            ? 'Tiempo: ${_animation.value} s (Reiniciar)'
-            : 'Tiempo: ${_animation.value} s (Detener)'
+            ? _animation.value == widget.seconds
+              ? 'Tiempo: ${widget.seconds} s (Reiniciar)'
+              : 'Tiempo: ${_animation.value} s (Detener)'
             : 'Iniciar cronómetro',
         style: infoStyle,
       ),
