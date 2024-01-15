@@ -71,161 +71,168 @@ class _CalendarPageState extends State<CalendarPage> {
   @override
   Widget build(BuildContext context) {
     return ScreenTemplate(
-        body: Column(
-          children: [
-            MySizedBox(200.0, 65.0),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Row(
-                children: [
-                  MySizedBox(15.0, 15.0),
-                  const Text(
-                    "CALENDARIO",
-                    style: tittleStyle,
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              MySizedBox(200.0, 65.0),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  children: [
+                    MySizedBox(15.0, 15.0),
+                    const Text(
+                      "CALENDARIO",
+                      style: tittleStyle,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            TableCalendar(
-              locale: 'es_ES',
-              firstDay: DateTime.utc(2010, 10, 16),
-              lastDay: DateTime.utc(2030, 3, 14),
-              focusedDay: DateTime.now(),
-              selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
-              calendarFormat: _calendarFormat,
-              startingDayOfWeek: StartingDayOfWeek.monday,
-              onDaySelected: _onDaySelected,
-              eventLoader: _getEventsForDay,
-              calendarStyle: const CalendarStyle(
-                outsideDaysVisible: true,
+              TableCalendar(
+                locale: 'es_ES',
+                firstDay: DateTime.utc(2010, 10, 16),
+                lastDay: DateTime.utc(2030, 3, 14),
+                focusedDay: DateTime.now(),
+                selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+                calendarFormat: _calendarFormat,
+                startingDayOfWeek: StartingDayOfWeek.monday,
+                onDaySelected: _onDaySelected,
+                eventLoader: _getEventsForDay,
+                calendarStyle: const CalendarStyle(
+                  outsideDaysVisible: true,
+                ),
+                onFormatChanged: (format) {
+                  if (_calendarFormat != format) {
+                    setState(() {
+                      _calendarFormat = format;
+                    });
+                  }
+                },
+                onPageChanged: (focusedDay) {
+                  _focusedDay = focusedDay;
+                },
               ),
-              onFormatChanged: (format) {
-                if (_calendarFormat != format) {
-                  setState(() {
-                    _calendarFormat = format;
-                  });
-                }
-              },
-              onPageChanged: (focusedDay) {
-                _focusedDay = focusedDay;
-              },
-            ),
-            ValueListenableBuilder<List<Event>>(
-              valueListenable: _selectedEvents,
-              builder: (context, value, _){
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: value.length,
-                  itemBuilder: (context, index) {
-                    Event currentEvent = value[index];
-                    return Container(
-                      margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(12),
-                        color: Colors.white
-                      ),
-                      child: ListTile(
-                        title: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                currentEvent.title,
-                                style: normalStyle,
+              ValueListenableBuilder<List<Event>>(
+                  valueListenable: _selectedEvents,
+                  builder: (context, value, _){
+                    return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: value.length,
+                        itemBuilder: (context, index) {
+                          Event currentEvent = value[index];
+                          return Container(
+                            margin: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                            decoration: BoxDecoration(
+                                border: Border.all(),
+                                borderRadius: BorderRadius.circular(12),
+                                color: Colors.white
+                            ),
+                            child: ListTile(
+                              title: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      currentEvent.title,
+                                      style: normalStyle,
+                                    ),
+                                  ),
+                                  Text(
+                                    currentEvent.time,
+                                    style: normalStyle,
+                                  ),
+                                ],
                               ),
                             ),
-                            Text(
-                              currentEvent.time,
-                              style: normalStyle,
-                            ),
-                          ],
-                        ),
-                      ),
+                          );
+                        }
                     );
                   }
-                );
-              }
-            ),
-            InkWell(
-              onTap: (){
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    _eventController.text = '';
-                    _timeEventController.text = '';
-                    return AlertDialog(
-                      scrollable: true,
-                      title: Text("Evento"),
-                      content: Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Column(
-                          children: [
-                            TextField(
-                              controller: _eventController,
-                              decoration: InputDecoration(labelText: 'Nombre'),
-                            ),
-                            TextField(
-                              controller: _timeEventController,
-                              decoration: const InputDecoration(
-                                labelText: 'Hora del evento (HH:mm)',
-                                hintText: 'Ejemplo: 10:30',
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      actions: [
-                        ElevatedButton(
-                            onPressed: () {
-                              if (!_isValidTimeFormat(_timeEventController.text)) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Formato de hora inválido'),
-                                  ),
-                                );
-                                return;
-                              }
-                              final selectedDay = _selectedDay!;
-                              final newEvent = Event(_eventController.text,_timeEventController.text);
-                              events.update(
-                                selectedDay,
-                                    (existingEvents) {
-                                  existingEvents.add(newEvent);
-                                  return existingEvents;
-                                },
-                                ifAbsent: () => [newEvent],
-                              );
-                              _firebaseService = FirebaseService();
-                              _firebaseService.saveEvents(selectedDay, events[selectedDay]!);
-                              Navigator.of(context).pop();
-                              setState(() {
-                                _selectedEvents.value = _getEventsForDay(selectedDay);
-                              });
-                            },
-                            child: Text("Agregar"))
-                      ],
-                    );
-                  },
-                );
-              },
-              child: Container(
-                width: 150.0,
-                height: 60.0,
-                decoration: BoxDecoration(
-                  color: widgets_background_brown,
-                  border: Border.all(color: Colors.black, width: 2.0),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Center(
-                  child: Text(
-                    "Añadir evento",
-                    style: normalStyle,
-                  ),
-                )
               ),
-            )
-          ],
+              MySizedBox(10, 10),
+              InkWell(
+                onTap: (){
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      _eventController.text = '';
+                      _timeEventController.text = '';
+                      return AlertDialog(
+                        scrollable: true,
+                        title: Text("Evento"),
+                        content: Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Column(
+                            children: [
+                              TextField(
+                                controller: _eventController,
+                                decoration: InputDecoration(labelText: 'Nombre'),
+                              ),
+                              TextField(
+                                controller: _timeEventController,
+                                decoration: const InputDecoration(
+                                  labelText: 'Hora del evento (HH:mm)',
+                                  hintText: 'Ejemplo: 10:30',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        actions: [
+                          ElevatedButton(
+                              onPressed: () {
+                                if (!_isValidTimeFormat(_timeEventController.text)) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Formato de hora inválido'),
+                                    ),
+                                  );
+                                  return;
+                                }
+                                final selectedDay = _selectedDay!;
+                                final newEvent = Event(_eventController.text,_timeEventController.text);
+                                events.update(
+                                  selectedDay,
+                                      (existingEvents) {
+                                    existingEvents.add(newEvent);
+                                    return existingEvents;
+                                  },
+                                  ifAbsent: () => [newEvent],
+                                );
+                                _firebaseService = FirebaseService();
+                                _firebaseService.saveEvents(selectedDay, events[selectedDay]!);
+                                Navigator.of(context).pop();
+                                setState(() {
+                                  _selectedEvents.value = _getEventsForDay(selectedDay);
+                                });
+                              },
+                              child: Text("Agregar"))
+                        ],
+                      );
+                    },
+                  );
+                },
+                child: Container(
+                    width: 150.0,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      color: widgets_background_brown,
+                      border: Border.all(color: Colors.black, width: 2.0),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "Añadir evento",
+                        style: normalStyle,
+                      ),
+                    )
+                ),
+              ),
+              Container(
+                color: background_blue,
+                height: 218,
+              )
+            ],
+          ),
         )
     );
   }

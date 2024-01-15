@@ -17,15 +17,9 @@ class BenefitsPage extends StatelessWidget {
   static const TextStyle normalStyle = TextStyle(
     color: Colors.black,
     fontWeight: FontWeight.bold,
-    fontSize: 18,
+    fontSize: 16,
+    height: 1.5,
   );
-
-  static const TextStyle gameStyle = TextStyle(
-    color: Colors.white,
-    fontWeight: FontWeight.bold,
-    fontSize: 35,
-  );
-
 
   @override
   Widget build(BuildContext context) {
@@ -61,20 +55,19 @@ class BenefitsPage extends StatelessWidget {
             Container(
                 width: 320.0,
                 height: 530.0,
-                padding: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(10.0),
                 decoration: BoxDecoration(
                   color: widgets_background_brown,
                   border: Border.all(color: Colors.black, width: 2.0),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Center(
+                child: const Center(
                   child: Column(
                     children: [
-                      MySizedBox(10.0, 10.0),
-                      const Text(
-                        'MANTENER EL CUERPO Y LA  MENTE SANAS PROPORCIONA INNUMERABLES BENEFICIOS PARA MEJORAR LA CALIDAD DE VIDA. LA ACTIVIDAD FÍSICA REGULAR NO SOLO FORTALECE LOS MÚSCULOS Y MEJORA LA MOVILIDAD, SINO QUE TAMBIÉN CONTRIBUYE A UN CORAZÓN MÁS SALUDABLE Y A UN SISTEMA INMUNOLÓGICO ROBUSTO. AL MISMOTIEMPO, LOS EJERCICIOS DE MEMORIA Y COGNITIVOS AYUDAN A MANTENER LA MENTE ÁGIL, ESTIMULANDO LA CONCENTRACIÓN Y PREVINIENDO EL DETERIORO COGNITIVO. UN CUERPO ENFORMA Y UNA MENTE ACTIVA SE TRADUCEN EN MAYOR ENERGÍA, MEJOR HUMOR Y UNA SENSACIÓN GENERAL DE BIENESTAR.\n¡INVIERTE EN TU SALUD HOY PARA COSECHAR LOS BENEFICIOS MAÑANA!',
+                      Text(
+                        'MANTENER EL CUERPO Y LA MENTE SANAS PROPORCIONA INNUMERABLES BENEFICIOS RELACIONADOS CON LA MEJORA DE LA CALIDAD DE VIDA. LA ACTIVIDAD FÍSICA REGULAR NO SOLO FORTALECE LOS MÚSCULOS Y MEJORA LA MOVILIDAD, SINO QUE TAMBIÉN CONTRIBUYE A UN CORAZÓN MÁS SALUDABLE Y A UN SISTEMA MÁS ROBUSTO. AL MISMO TIEMPO, LOS EJERCICIOS DE MEMORIA Y LOS COGNITIVOS AYUDAN A MANTENER LA MENTE ÁGIL, ESTIMULANDO ASPECTOS TALES COMO LA CONCENTRACIÓN Y AYUDANDO A PREVENIR EL DETERIORO COGNITIVO. UN CUERPO EN FORMA Y UNA MENTE ACTIVA SE TRADUCEN EN MAYOR ENERGÍA  Y UNA SENSACIÓN GENERAL DE BIENESTAR.\n¡INVIERTE EN TU SALUD PARA MEJORAR TU CALIDAD DE VIDA!',
                         style: normalStyle,
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.justify,
                       ),
                     ],
                   ),

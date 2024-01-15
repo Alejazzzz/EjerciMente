@@ -33,16 +33,16 @@ class CoupleDatesPage extends StatelessWidget {
   Widget buildCoupleOrDate(bool couples) {
     if (couples == true) {
       return const Text(
-        'EN ESTE JUEGO EL OBJETIVO ES MEMORIZAR EN 20 SEGUNDOS LAS PAREJAS DE IMÁGENES, UNA VEZ PASE ESTE TIEMPO TODAS ELLAS QUEDARAN TAPADAS Y  SE DEBERÁN SELECCIONAR LAS PAREJAS CLICKANDO EN ELLAS, CADA ACIERTO SERÁN 100 PUNTOS. PARA JUGAR PULSE AL BOTÓN "JUGAR" QUE SE ENCUENTRA DEBAJO',
+        'ESTE JUEGO CONSISTE EN MEMORIZAR EN VEINTE SEGUNDOS LAS PAREJAS DE IMÁGENES. UNA VEZ PASE ESTE TIEMPO, TODAS LAS IMÁGENES QUEDARÁN CUBIERTAS Y DEBERÁS HACER CLIC EN ELLAS PARA SELECCIONAR LAS PAREJAS. CADA ACIERTO SERÁN 100 PUNTOS. PARA JUGAR PULSE EL BOTÓN LILA "JUGAR" QUE SE ENCUENTRA DEBAJO',
         style: normalStyle,
-        textAlign: TextAlign.center,
+        textAlign: TextAlign.justify,
 
       );
     } else {
       return const Text(
-        'EN ESTE JUEGO EL OBJETIVO ES MEMORIZAR QUE ESTABAS HACIENDO EN LA FECHA QUE APARECERA POR PANTALLA, UNA VEZ HAYAS HECHO EL ESFUERZO DE RECORDAR QUE HICISTE AQUEL DIA PUEDES GENERAR OTRA FECHA Y VOLVER A REALIZAR EL  EJERCICIO O VOLVER AL MENÚ',
+        'ESTE JUEGO CONSISTE EN RECORDAR QUE ESTABA HACIENDO EN LA FECHA QUE LE APARECERÁ POR PANTALLA. UNA VEZ RECUERDES QUÉ HICISTE ESE DÍA, PUEDES OPTAR POR GENERAR UNA FECHA DISTINTA Y REPETIR EL EJERCICIO O VOLVER AL MENÚ PRINCIPAL. PARA JUGAR PULSE EL BOTÓN LILA "JUGAR" QUE SE ENCUENTRA DEBAJO',
         style: normalStyle,
-        textAlign: TextAlign.center,
+        textAlign: TextAlign.justify,
       );
     }
   }
@@ -81,7 +81,7 @@ class CoupleDatesPage extends StatelessWidget {
             Container(
               width: 305.0,
               height: 510.0,
-              padding: EdgeInsets.all(5.0),
+              padding: EdgeInsets.all(10.0),
               decoration: BoxDecoration(
                 color: widgets_background_brown,
                 border: Border.all(color: Colors.black, width: 2.0),

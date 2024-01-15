@@ -75,7 +75,7 @@ class _ExerciseInfoPageState extends State<ExerciseInfoPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 10.0,0,0,),
+            padding: const EdgeInsets.fromLTRB(16.0, 10.0,15.0,0,),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -108,13 +108,14 @@ class _ExerciseInfoPageState extends State<ExerciseInfoPage> {
                 MyDivider(),
                 MySizedBox(5, 5),
                 Text(
-                  '${exerciseData['instrucciones']}'
-                      .split('-')
-                      .asMap()
-                      .entries
-                      .map((entry) => '${entry.key + 1}. ${entry.value.trim()}')
-                      .join('\n'),
-                  style: infoStyle,
+                    '${exerciseData['instrucciones']}'
+                        .split('-')
+                        .asMap()
+                        .entries
+                        .map((entry) => '${entry.key + 1}. ${entry.value.trim()}')
+                        .join('\n \n'),
+                    style: infoStyle,
+                    textAlign: TextAlign.justify
                 ),
                 MySizedBox(10, 10),
                 const Text(

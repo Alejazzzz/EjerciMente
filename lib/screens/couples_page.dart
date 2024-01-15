@@ -48,7 +48,7 @@ class _CouplesPageState extends State<CouplesPage> {
     myPairs.shuffle();
 
     gridViewTiles = myPairs;
-    Future.delayed(const Duration(seconds: 10), () {
+    Future.delayed(const Duration(seconds: 20), () {
       setState(() {
         questionPairs = getQuestionPairs();
         gridViewTiles = questionPairs;
@@ -216,7 +216,7 @@ class _TileState extends State<Tile> {
               points = points + 100;
               TileModel tileModel = new TileModel();
               selected = true;
-              Future.delayed(const Duration(seconds: 2), () {
+              Future.delayed(const Duration(seconds: 1), () {
                 tileModel.setImageAssetPath("");
                 myPairs[widget.tileIndex!] = tileModel;
                 myPairs[selectedIndex!] = tileModel;
@@ -228,7 +228,7 @@ class _TileState extends State<Tile> {
               });
             } else {
               selected = true;
-              Future.delayed(const Duration(seconds: 2), () {
+              Future.delayed(const Duration(seconds: 1), () {
                 this.widget.parent?.setState(() {
                   myPairs[widget.tileIndex!].setIsSelected(false);
                   myPairs[selectedIndex!].setIsSelected(false);
