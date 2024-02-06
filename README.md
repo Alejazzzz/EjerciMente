@@ -2,8 +2,6 @@
 
 Bienvenidos al proyecto EjerciMente.
 
-EjerciMente es una aplicación móvil desarrollada con Flutter que tiene como objetivo principal promover el bienestar físico y mental de las personas de tercera edad.
-
 ## Descripción
 
 El proyecto EjerciMente se centra en el desarrollo de una aplicación móvil utilizando la tecnología Flutter. Esta aplicación está diseñada para personas de tercera edad con el objetivo de promover el bienestar tanto físico como mental. La aplicación ofrece las siguientes características:
@@ -21,4 +19,8 @@ El objetivo principal de EjerciMente es mejorar la calidad de vida de las person
 En la carpeta [INFORMES](https://github.com/Alejazzzz/EjerciMente/tree/master/INFORMES) se pueden encontrar todos los informes realizados en el desarrollo del proyecto.
 
 Todos los demás archivos y carpetas componen el código fuente de la aplicación multiplataforma.
+
+## Autor
+
+Alejandro García García
 
